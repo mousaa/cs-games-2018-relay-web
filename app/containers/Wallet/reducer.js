@@ -11,7 +11,8 @@ import { SUCCESS } from '../../asyncDisplayer/containers/constants';
 
 
 export const WALLETS_REDUCER_INITIAL_STATE = fromJS({
-  wallets: []
+  wallets: [], 
+  wallet: ''
 });
 
 function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
@@ -21,7 +22,10 @@ function walletReducer(state = WALLETS_REDUCER_INITIAL_STATE, action) {
       .set('wallets', fromJS(action.entity));
     //DOES NOT WORK AT THE MOMENT
     case `${ADD_WALLET}${SUCCESS}`:
-      return state.get('wallets').concat(action.entity);
+      return {
+        ...state,
+        wallet: action.entity
+      }
     default:
       return state;
   }
